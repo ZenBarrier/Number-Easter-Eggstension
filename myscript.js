@@ -1,5 +1,5 @@
 var rxp = new RegExp("([0-9]+)", "gm");
-$("div, p, span, pre, b, i, h, code").not(".easterEggstension").contents().filter(function () {
+$("div, p, span, b, i, h").not(".easterEggstension").contents().filter(function () {
     return this.nodeType === 3;
 }).each(function () {
     var text = this.nodeValue;
