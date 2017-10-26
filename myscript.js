@@ -12,12 +12,20 @@
         });
 
         $("egg").one('click', function () {
+            var numApi = numberCall($(this).text());
             $(this).popover({
-                content: $(this).text(),
+                content: numApi.responseText,
                 trigger: "hover",
                 placement: "top"});
             $(this).popover("show");
         });
+    }
+    
+    function numberCall(number) {
+        var xhr = new XMLHttpRequest();
+        xhr.open("GET", "http://numbersapi.com/"+number, false);
+        xhr.send();
+        return xhr;
     }
     
     function wrapNumbers(node) {
