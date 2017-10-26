@@ -23,7 +23,7 @@
     function wrapNumbers(node) {
         var rxp = new RegExp("([0-9]+)", "gm");
         var text = node.nodeValue;
-        $(node).replaceWith(text.replace(rxp, "<egg class='easterEggstension' data-toggle='popover'>$1</egg>"));
+        $(node).replaceWith(text.replace(rxp, "<egg class='easterEggstension' data-container='body' data-toggle='popover'>$1</egg>"));
     }
 
     var observer = new MutationObserver(function (mutations) {
