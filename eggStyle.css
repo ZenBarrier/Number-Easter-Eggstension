@@ -12,3 +12,7 @@ egg.easterEggstension{
     filter: invert(30%);
     border-bottom: 3px double;
 }
+
+.popover-content{
+    color: black;
+}
