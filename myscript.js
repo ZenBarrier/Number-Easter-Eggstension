@@ -2,15 +2,13 @@
 
     MutationObserver = window.MutationObserver || window.WebKitMutationObserver;
 
-    function wrapNumbers(node) {
-        var rxp = new RegExp("([0-9]+)", "gm");
+    function findNumbers(node) {
         var $node = $(node);
         $node.not(".easterEggstension").filter("div, p, span, b, i, h").contents().filter(function () {
             var hasNumber = /\d/;
             return this.nodeType === 3 && hasNumber.test(this.nodeValue);
         }).each(function () {
-            var text = this.nodeValue;
-            $(this).replaceWith(text.replace(rxp, "<egg class='easterEggstension' data-toggle='popover'>$1</egg>"));
+            wrapNumbers(this);
         });
 
         $(document).on('click', 'egg[data-toggle="popover"]', function () {
@@ -21,6 +19,12 @@
             $(this).popover("show");
         });
     }
+    
+    function wrapNumbers(node) {
+        var rxp = new RegExp("([0-9]+)", "gm");
+        var text = node.nodeValue;
+        $(node).replaceWith(text.replace(rxp, "<egg class='easterEggstension' data-toggle='popover'>$1</egg>"));
+    }
 
     var observer = new MutationObserver(function (mutations) {
         mutations.forEach(function(mutation) {
@@ -30,17 +34,15 @@
                 $nodes.each(function(){
                     var hasNumber = /\d/;
                     if(this.nodeType === 3 && hasNumber.test(this.nodeValue)){
-                        var rxp = new RegExp("([0-9]+)", "gm");
-                        var text = this.nodeValue;
-                        $(this).replaceWith(text.replace(rxp, "<egg class='easterEggstension' data-toggle='popover'>$1</egg>"));
-                    }else if(this.nodeType !== 3){wrapNumbers(this);}
+                        wrapNumbers(this);
+                    }else if(this.nodeType !== 3){findNumbers(this);}
                 });
             }
         });
     });
     
     $(document).ready(function () {
-        wrapNumbers('*');
+        findNumbers('*');
         observer.observe(document, {
             subtree: true,
             childList: true,
