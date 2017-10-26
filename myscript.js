@@ -11,7 +11,7 @@
             wrapNumbers(this);
         });
 
-        $(document).one('click', 'egg[data-toggle="popover"]', function () {
+        $("egg").one('click', function () {
             $(this).popover({
                 content: $(this).text(),
                 trigger: "hover",
