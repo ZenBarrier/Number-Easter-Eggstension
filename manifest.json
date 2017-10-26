@@ -8,8 +8,8 @@
     "content_scripts": [
     {
       "matches": ["<all_urls>"],
-      "css":["bootstrap.css", "eggStyle.css"],
-      "js": ["jquery-3.2.1.min.js", "popper.min.js", "bootstrap.min.js", "myscript.js"]
+      "css":["eggStyle.css", "bootstrap.css"],
+      "js": ["jquery-3.2.1.min.js", "bootstrap.min.js", "myscript.js"]
     }
   ],
 
