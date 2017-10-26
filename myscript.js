@@ -6,7 +6,8 @@
         var rxp = new RegExp("([0-9]+)", "gm");
         var $node = $(node);
         $node.not(".easterEggstension").filter("div, p, span, b, i, h").contents().filter(function () {
-            return this.nodeType === 3;
+            var hasNumber = /\d/;
+            return this.nodeType === 3 && hasNumber.test(this.nodeValue);
         }).each(function () {
             var text = this.nodeValue;
             $(this).replaceWith(text.replace(rxp, "<egg class='easterEggstension' data-toggle='popover'>$1</egg>"));
@@ -31,21 +32,23 @@ $( document ).ready(function() {
             if(newNodes !== null){
                 var $nodes = $(newNodes);
                 $nodes.each(function(){
-                    var $node = $(this);
-                    //onsole.log($node);
+                    var hasNumber = /\d/;
+                    if(this.nodeType === 3 && hasNumber.test(this.nodeValue)){
+                        var rxp = new RegExp("([0-9]+)", "gm");
+                        var text = this.nodeValue;
+                        $(this).replaceWith(text.replace(rxp, "<egg class='easterEggstension' data-toggle='popover'>$1</egg>"));
+                    }else if(this.nodeType !== 3){wrapNumbers(this);}
                 });
             }
-            //console.log(mutation.type);
         });
-        // fired when a mutation occurs
-        //wrapNumbers();
     });
 
     // define what element should be observed by the observer
     // and what types of mutations trigger the callback
     observer.observe(document, {
         subtree: true,
-        childList: true
+        childList: true,
+        characterData: true 
                 //...
     });
 
