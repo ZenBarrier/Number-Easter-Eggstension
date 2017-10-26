@@ -21,10 +21,6 @@
             $(this).popover("show");
         });
     }
-$( document ).ready(function() {
-    console.log( "ready!" );
-    wrapNumbers('*');
-});
 
     var observer = new MutationObserver(function (mutations) {
         mutations.forEach(function(mutation) {
@@ -42,14 +38,15 @@ $( document ).ready(function() {
             }
         });
     });
-
-    // define what element should be observed by the observer
-    // and what types of mutations trigger the callback
-    observer.observe(document, {
-        subtree: true,
-        childList: true,
-        characterData: true 
-                //...
+    
+    $(document).ready(function () {
+        wrapNumbers('*');
+        observer.observe(document, {
+            subtree: true,
+            childList: true,
+            characterData: true
+                    //...
+        });
     });
 
 })();
