@@ -11,7 +11,7 @@
             wrapNumbers(this);
         });
 
-        $(document).on('click', 'egg[data-toggle="popover"]', function () {
+        $(document).one('click', 'egg[data-toggle="popover"]', function () {
             $(this).popover({
                 content: $(this).text(),
                 trigger: "hover",
@@ -27,10 +27,12 @@
     }
 
     var observer = new MutationObserver(function (mutations) {
-        mutations.forEach(function(mutation) {
+        mutations.forEach(function (mutation) {
             var newNodes = mutation.addedNodes;
-            if(newNodes !== null){
-                var $nodes = $(newNodes);
+            if (newNodes !== null) {
+                var $nodes = $(newNodes);/*.filter(function () {
+                    return !($(this).parents(".popover-content").length);
+                });*/
                 $nodes.each(function(){
                     var hasNumber = /\d/;
                     if(this.nodeType === 3 && hasNumber.test(this.nodeValue)){
@@ -43,12 +45,13 @@
     
     $(document).ready(function () {
         findNumbers('*');
+        /*
         observer.observe(document, {
             subtree: true,
             childList: true,
             characterData: true
                     //...
-        });
+        });*/
     });
 
 })();
