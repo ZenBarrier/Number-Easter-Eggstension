@@ -12,7 +12,8 @@ chrome.runtime.onMessage.addListener(
             
             var x = new XMLHttpRequest();
             x.onload = function () {
-                sendResponse(x.responseText);
+                if(x.status === 200){sendResponse(x.responseText);}
+                else{sendResponse("")}
             };
             x.onerror = function () {
                 console.log(x);
