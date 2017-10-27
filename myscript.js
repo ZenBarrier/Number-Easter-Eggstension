@@ -12,20 +12,19 @@
         });
 
         $("egg").one('click', function () {
-            var numApi = numberCall($(this).text());
-            $(this).popover({
-                content: numApi.responseText,
-                trigger: "hover",
-                placement: "top"});
-            $(this).popover("show");
+            var egg = this;
+            chrome.runtime.sendMessage(
+                    $(egg).text(),
+                    function (response) {
+                        $(egg).popover({
+                            content: response,
+                            trigger: "hover",
+                            placement: "top"});
+                        $(egg).popover("show");
+                    }
+            );
+            
         });
-    }
-    
-    function numberCall(number) {
-        var xhr = new XMLHttpRequest();
-        xhr.open("GET", "http://numbersapi.com/"+number, false);
-        xhr.send();
-        return xhr;
     }
     
     function wrapNumbers(node) {
