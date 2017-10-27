@@ -20,15 +20,19 @@
                 placement: "top"});
         });
 
-        $("egg").not(".cracked").one('mouseover', function () {
+        $("egg").not(".cracked").on('mouseover', function () {
             var egg = this;
             chrome.runtime.sendMessage(
                     $(egg).text(),
                     function (response) {
+                        if(response === ''){
+                            return;
+                        }
                         $(egg).data('bs.popover').options.content = response;
                         if ($(egg).is(":hover")) {
                             $(egg).popover("show");
                         }
+                        //$(egg).off();
                     }
             );
             
