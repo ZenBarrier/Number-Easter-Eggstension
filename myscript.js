@@ -13,7 +13,6 @@
 
         $("egg").not(".cracked").one('click', function () {
             var egg = this;
-            $(egg).addClass("cracked");
             chrome.runtime.sendMessage(
                     $(egg).text(),
                     function (response) {
@@ -26,6 +25,7 @@
             );
             
         });
+        $("egg").not(".cracked").addClass("cracked");
     }
     
     function wrapNumbers(node) {
