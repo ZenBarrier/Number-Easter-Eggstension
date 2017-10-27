@@ -4,11 +4,20 @@
 
     function findNumbers(node) {
         var $node = $(node);
-        $node.not(".easterEggstension, a *").filter("div, p, span, b, i, h").contents().filter(function () {
+        $node.not("egg, a *").filter("div, p, span, b, i, h").contents().filter(function () {
             var hasNumber = /\d/;
             return this.nodeType === 3 && hasNumber.test(this.nodeValue);
         }).each(function () {
             wrapNumbers(this);
+        });
+        
+        $("egg").not(".cracked").each(function () {
+            var egg = this;
+            $(egg).popover({
+                content: "<span class='glyphicon glyphicon-align-left' aria-hidden='true'></span>",
+                html: true,
+                trigger: "hover",
+                placement: "top"});
         });
 
         $("egg").not(".cracked").one('mouseover', function () {
@@ -16,11 +25,10 @@
             chrome.runtime.sendMessage(
                     $(egg).text(),
                     function (response) {
-                        $(egg).popover({
-                            content: response,
-                            trigger: "hover",
-                            placement: "top"});
-                        $(egg).popover("show");
+                        $(egg).data('bs.popover').options.content = response;
+                        if ($(egg).is(":hover")) {
+                            $(egg).popover("show");
+                        }
                     }
             );
             
