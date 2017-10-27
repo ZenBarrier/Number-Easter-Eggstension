@@ -14,7 +14,7 @@
         $("egg").not(".cracked").each(function () {
             var egg = this;
             $(egg).popover({
-                content: "<span class='glyphicon glyphicon-align-left' aria-hidden='true'></span>",
+                content: "<span class='egg-loading glyphicon glyphicon-refresh gly-spin' aria-hidden='true'></span>",
                 html: true,
                 trigger: "hover",
                 placement: "top"});
