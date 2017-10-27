@@ -4,7 +4,7 @@
 
     function findNumbers(node) {
         var $node = $(node);
-        $node.not(".easterEggstension").filter("div, p, span, b, i, h").contents().filter(function () {
+        $node.not(".easterEggstension, a *").filter("div, p, span, b, i, h").contents().filter(function () {
             var hasNumber = /\d/;
             return this.nodeType === 3 && hasNumber.test(this.nodeValue);
         }).each(function () {
@@ -39,7 +39,7 @@
             var newNodes = mutation.addedNodes;
             if (newNodes !== null) {
                 var $nodes = $(newNodes).filter(function () {
-                    return !($(this).parents(".popover-content, popover").length);
+                    return !($(this).parents(".popover-content, popover, a").length);
                 });
                 $nodes.each(function(){
                     var hasNumber = /\d/;
