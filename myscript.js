@@ -11,8 +11,9 @@
             wrapNumbers(this);
         });
 
-        $("egg").one('click', function () {
+        $("egg").not(".cracked").one('click', function () {
             var egg = this;
+            $(egg).addClass("cracked");
             chrome.runtime.sendMessage(
                     $(egg).text(),
                     function (response) {
@@ -37,9 +38,9 @@
         mutations.forEach(function (mutation) {
             var newNodes = mutation.addedNodes;
             if (newNodes !== null) {
-                var $nodes = $(newNodes);/*.filter(function () {
-                    return !($(this).parents(".popover-content").length);
-                });*/
+                var $nodes = $(newNodes).filter(function () {
+                    return !($(this).parents(".popover-content, popover").length);
+                });
                 $nodes.each(function(){
                     var hasNumber = /\d/;
                     if(this.nodeType === 3 && hasNumber.test(this.nodeValue)){
@@ -52,13 +53,13 @@
     
     $(document).ready(function () {
         findNumbers('*');
-        /*
-        observer.observe(document, {
+        
+        observer.observe(document.body, {
             subtree: true,
             childList: true,
             characterData: true
                     //...
-        });*/
+        });
     });
 
 })();
