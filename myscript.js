@@ -47,7 +47,7 @@
             var newNodes = mutation.addedNodes;
             if (newNodes !== null) {
                 var $nodes = $(newNodes).filter(function () {
-                    return !($(this).parents(".popover-content, popover, a").length);
+                    return !($(this).parents(".popover-content, popover, a, style").length);
                 });
                 $nodes.each(function(){
                     var hasNumber = /\d/;
