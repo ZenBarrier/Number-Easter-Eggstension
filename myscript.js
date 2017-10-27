@@ -11,7 +11,7 @@
             wrapNumbers(this);
         });
 
-        $("egg").not(".cracked").one('click', function () {
+        $("egg").not(".cracked").one('mouseover', function () {
             var egg = this;
             chrome.runtime.sendMessage(
                     $(egg).text(),
