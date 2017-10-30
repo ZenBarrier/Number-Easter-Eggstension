@@ -20,7 +20,7 @@
                 placement: "top"});
         });
 
-        $("egg").not(".cracked").on('mouseover', function () {
+        $("egg").not(".cracked").one('mouseover', function () {
             var egg = this;
             chrome.runtime.sendMessage(
                     $(egg).text(),
@@ -32,7 +32,6 @@
                         if ($(egg).is(":hover")) {
                             $(egg).popover("show");
                         }
-                        //$(egg).off();
                     }
             );
             
